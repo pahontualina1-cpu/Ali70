@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chimie Anorganică - Clasa a 7-a</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --dark: #34495e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            margin-right: 1rem;
+            color: var(--light);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            flex: 1;
+            text-align: center;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            font-weight: 600;
+        }
+        
+        .tab:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .tab.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+            background-color: #f0f7ff;
+        }
+        
+        .content-section {
+            display: none;
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h2 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light);
+        }
+        
+        h3 {
+            color: var(--dark);
+            margin: 1.5rem 0 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .highlight {
+            background-color: #e8f4fc;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .element-card {
+            display: inline-block;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem;
+            width: 80px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        
+        .element-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .element-symbol {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .element-name {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .exercise {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--warning);
+        }
+        
+        .exercise-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .exercise-title i {
+            color: var(--warning);
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .question {
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .option {
+            padding: 0.8rem;
+            background-color: white;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .option:hover {
+            background-color: #f0f7ff;
+            border-color: var(--primary);
+        }
+        
+        .option.selected {
+            background-color: #e8f4fc;
+            border-color: var(--primary);
+        }
+        
+        .option.correct {
+            background-color: #d4edda;
+            border-color: var(--success);
+        }
+        
+        .option.incorrect {
+            background-color: #f8d7da;
+            border-color: var(--accent);
+        }
+        
+        .btn {
+            padding: 0.7rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            margin-right: 0.5rem;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-check {
+            background-color: var(--success);
+        }
+        
+        .btn-check:hover {
+            background-color: #27ae60;
+        }
+        
+        .btn-reset {
+            background-color: var(--warning);
+        }
+        
+        .btn-reset:hover {
+            background-color: #e67e22;
+        }
+        
+        .feedback {
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        
+        .feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        
+        .score-container {
+            background-color: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .score {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .periodic-table {
+            display: grid;
+            grid-template-columns: repeat(18, 1fr);
+            gap: 3px;
+            margin: 2rem 0;
+        }
+        
+        .element-cell {
+            background-color: #f0f7ff;
+            border-radius: 4px;
+            padding: 0.5rem 0.2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .element-cell:hover {
+            transform: scale(1.1);
+            z-index: 10;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .element-number {
+            font-size: 0.6rem;
+            color: #666;
+        }
+        
+        .element-symbol-cell {
+            font-weight: bold;
+            font-size: 1rem;
+            color: var(--secondary);
+        }
+        
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .periodic-table {
+                grid-template-columns: repeat(9, 1fr);
+                gap: 2px;
+            }
+            
+            .element-cell {
+                padding: 0.3rem 0.1rem;
+                font-size: 0.7rem;
+            }
+            
+            .element-symbol-cell {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <i class="fas fa-flask logo"></i>
+            <div>
+                <h1>Chimie Anorganică - Clasa a 7-a</h1>
+                <p class="subtitle">Învață și exersează noțiunile fundamentale de chimie anorganică</p>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="nav-tabs">
+            <div class="tab active" data-target="acasa">Acasă</div>
+            <div class="tab" data-target="noțiuni">Noțiuni fundamentale</div>
+            <div class="tab" data-target="elemente">Elemente chimice</div>
+            <div class="tab" data-target="compuși">Compuși anorganici</div>
+            <div class="tab" data-target="exercitii">Exerciții interactive</div>
+        </div>
+        
+        <section id="acasa" class="content-section active">
+            <h2>Bun venit la platforma de învățare a chimiei anorganice!</h2>
+            <p>Acest site este creat pentru a te ajuta să înțelegi și să exersezi noțiunile de bază din chimia anorganică, conform programei școlare pentru clasa a 7-a.</p>
+            
+            <div class="highlight">
+                <p><i class="fas fa-lightbulb"></i> <strong>Sfat de învățare:</strong> Pentru a reține mai ușor informațiile, încearcă să faci exercițiile interactive după ce studiezi fiecare capitol.</p>
+            </div>
+            
+            <h3>Ce vei învăța aici:</h3>
+            <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                <li>Noțiuni fundamentale de chimie</li>
+                <li>Clasificarea elementelor chimice</li>
+                <li>Proprietățile principale ale elementelor</li>
+                <li>Compuși anorganici importanți</li>
+                <li>Simboluri și formule chimice</li>
+            </ul>
+            
+            <div class="exercise">
+                <div class="exercise-title">
+                    <i class="fas fa-question-circle"></i>
+                    <h3>Test rapid de verificare a cunoștințelor</h3>
+                </div>
+                <p>Completează acest test rapid pentru a-ți verifica cunoștințele de bază înainte de a trece la capitolele următoare.</p>
+                
+                <div class="question">1. Ce este un element chimic?</div>
+                <div class="options">
+                    <div class="option" data-correct="true">O substanță simplă care nu poate fi descompusă în substanțe mai simple prin metode chimice obișnuite</div>
+                    <div class="option">O combinație de două sau mai multe substanțe</div>
+                    <div class="option">O particulă care conține protoni și electroni</div>
+                    <div class="option">O substanță formată din atomi diferiți</div>
+                </div>
+                
+                <button class="btn btn-check" onclick="checkAnswer(this)">Verifică răspunsul</button>
+                <button class="btn btn-reset" onclick="resetExercise(this)">Resetează</button>
+                
+                <div class="feedback"></div>
+            </div>
+        </section>
+        
+        <section id="noțiuni" class="content-section">
+            <h2>Noțiuni fundamentale de chimie</h2>
+            
+            <h3>Materia și proprietățile ei</h3>
+            <p>Materia este tot ce ocupă loc în spațiu și are masă. Proprietățile materiei se împart în:</p>
+            
+            <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                <li><strong>Proprietăți fizice</strong>: proprietăți care pot fi observate fără a schimba natura substanței (ex: culoarea, punctul de topire, densitatea)</li>
+                <li><strong>Proprietăți chimice</strong>: proprietăți care descriu comportamentul substanței în reacții chimice (ex: inflamabilitatea, reactivitatea cu oxigenul)</li>
+            </ul>
+            
+            <h3>Atomul și structura sa</h3>
+            <p>Atomul este cea mai mică particulă a unui element care păstrează proprietățile chimice ale acelui element.</p>
+            
+            <div class="highlight">
+                <p><strong>Componentele atomului:</strong></p>
+                <ul style="margin-left: 1rem;">
+                    <li><strong>Protoni</strong>: particule cu sarcină pozitivă, se găsesc în nucleu</li>
+                    <li><strong>Neutroni</strong>: particule fără sarcină, se găsesc în nucleu</li>
+                    <li><strong>Electroni</strong>: particule cu sarcină negativă, se găsesc în învelișul electronic</li>
+                </ul>
+            </div>
+            
+            <div class="exercise">
+                <div class="exercise-title">
+                    <i class="fas fa-question-circle"></i>
+                    <h3>Verifică-ți cunoștințele</h3>
+                </div>
+                
+                <div class="question">2. Care dintre următoarele este o proprietate fizică a materiei?</div>
+                <div class="options">
+                    <div class="option" data-correct="true">Densitatea</div>
+                    <div class="option">Inflamabilitatea</div>
+                    <div class="option">Reactivitatea cu acizii</div>
+                    <div class="option">Stabilitatea la căldură</div>
+                </div>
+                
+                <div class="question" style="margin-top: 1.5rem;">3. Unde se găsesc protonii într-un atom?</div>
+                <div class="options">
+                    <div class="option">În învelișul electronic</div>
+                    <div class="option" data-correct="true">În nucleu</div>
+                    <div class="option">În orbitali</div>
+                    <div class="option">Pe stratul de valență</div>
+                </div>
+                
+                <button class="btn btn-check" onclick="checkAnswer(this)">Verifică răspunsurile</button>
+                <button class="btn btn-reset" onclick="resetExercise(this)">Resetează</button>
+                
+                <div class="feedback"></div>
+            </div>
+        </section>
+        
+        <section id="elemente" class="content-section">
+            <h2>Elemente chimice</h2>
+            
+            <h3>Clasificarea elementelor</h3>
+            <p>Elementele chimice se pot clasifica în:</p>
+            
+            <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                <li><strong>Metale</strong>: sunt lucioase, conductoare de căldură și electricitate, maleabile și ductile (ex: fier, cupru, aur)</li>
+                <li><strong>Nemetal</strong>: nu sunt lucioase, sunt izolatoare de căldură și electricitate, fragile (ex: carbon, sulf, oxigen)</li>
+                <li><strong>Metaloide</strong>: au proprietăți intermediare între metale și nemetale (ex: siliciu, germaniu)</li>
+            </ul>
+            
+            <h3>Elemente reprezentative</h3>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; margin: 1.5rem 0;">
+                <div class="element-card">
+                    <div class="element-symbol">O</div>
+                    <div class="element-name">Oxigen</div>
+                </div>
+                <div class="element-card">
+                    <div class="element-symbol">H</div>
+                    <div class="element-name">Hidrogen</div>
+                </div>
+                <div class="element-card">
+                    <div class="element-symbol">C</div>
+                    <div class="element-name">Carbon</div>
+                </div>
+                <div class="element-card">
+                    <div class="element-symbol">Fe</div>
+                    <div class="element-name">Fier</div>
+                </div>
+                <div class="element-card">
+                    <div class="element-symbol">Cu</div>
+                    <div class="element-name">Cupru</div>
+                </div>
+                <div class="element-card">
+                    <div class="element-symbol">S</div>
+                    <div class="element-name">Sulf</div>
+                </div>
+            </div>
+            
+            <h3>Tabelul periodic al elementelor (selecție)</h3>
+            <div class="periodic-table" id="periodic-table">
+                <!-- Tabelul periodic va fi generat prin JavaScript -->
+            </div>
+            
+            <div class="exercise">
+                <div class="exercise-title">
+                    <i class="fas fa-question-circle"></i>
+                    <h3>Identifică elementele</h3>
+                </div>
+                
+                <div class="question">4. Care dintre următoarele elemente este un metal?</div>
+                <div class="options">
+                    <div class="option">Oxigen (O)</div>
+                    <div class="option" data-correct="true">Fier (Fe)</div>
+                    <div class="option">Carbon (C)</div>
+                    <div class="option">Sulf (S)</div>
+                </div>
+                
+                <div class="question" style="margin-top: 1.5rem;">5. Care este simbolul chimic pentru hidrogen?</div>
+                <div class="options">
+                    <div class="option">He</div>
+                    <div class="option">O</div>
+                    <div class="option" data-correct="true">H</div>
+                    <div class="option">Hy</div>
+                </div>
+                
+                <button class="btn btn-check" onclick="checkAnswer(this)">Verifică răspunsurile</button>
+                <button class="btn btn-reset" onclick="resetExercise(this)">Resetează</button>
+                
+                <div class="feedback"></div>
+            </div>
+        </section>
+        
+        <section id="compuși" class="content-section">
+            <h2>Compuși anorganici</h2>
+            
+            <h3>Oxizii</h3>
+            <p>Oxizii sunt compuși binari ai oxigenului cu alte elemente.</p>
+            
+            <div class="highlight">
+                <p><strong>Exemple de oxizi importanți:</strong></p>
+                <ul style="margin-left: 1rem;">
+                    <li><strong>Apă (H₂O)</strong>: oxid de hidrogen</li>
+                    <li><strong>Dioxid de carbon (CO₂)</strong>: gaz prezent în atmosferă</li>
+                    <li><strong>Oxid de fier (Fe₂O₃)</strong>: rugina</li>
+                    <li><strong>Oxid de calciu (CaO)</strong>: var nestins</li>
+                </ul>
+            </div>
+            
+            <h3>Acizii și bazele</h3>
+            <p>Acizii sunt substanțe care în soluție apoasă eliberează ioni de hidrogen (H⁺). Bazele sunt substanțe care în soluție apoasă eliberează ioni hidroxil (OH⁻).</p>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 1.5rem 0;">
+                <div style="flex: 1; min-width: 250px; background-color: #f8d7da; padding: 1rem; border-radius: 8px;">
+                    <h4>Acizi comuni</h4>
+                    <ul style="margin-left: 1rem;">
+                        <li>Acid clorhidric (HCl)</li>
+                        <li>Acid sulfuric (H₂SO₄)</li>
+                        <li>Acid azotic (HNO₃)</li>
+                    </ul>
+                </div>
+                
+                <div style="flex: 1; min-width: 250px; background-color: #d4edda; padding: 1rem; border-radius: 8px;">
+                    <h4>Baze comune</h4>
+                    <ul style="margin-left: 1rem;">
+                        <li>Hidroxid de sodiu (NaOH)</li>
+                        <li>Hidroxid de calciu (Ca(OH)₂)</li>
+                        <li>Hidroxid de potasiu (KOH)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="exercise">
+                <div class="exercise-title">
+                    <i class="fas fa-question-circle"></i>
+                    <h3>Completează exercițiul</h3>
+                </div>
+                
+                <div class="question">6. Care este formula chimică a apei?</div>
+                <div class="options">
+                    <div class="option">CO₂</div>
+                    <div class="option">H₂SO₄</div>
+                    <div class="option" data-correct="true">H₂O</div>
+                    <div class="option">NaOH</div>
+                </div>
+                
+                <div class="question" style="margin-top: 1.5rem;">7. Ce tip de compus este NaOH?</div>
+                <div class="options">
+                    <div class="option">Acid</div>
+                    <div class="option" data-correct="true">Bază</div>
+                    <div class="option">Oxid</div>
+                    <div class="option">Sare</div>
+                </div>
+
+                 <div class="question" style="margin-top: 1.5rem;">7. Ce tip de compus este HCl?</div>
+                <div class="options">
+                    <div class="option">Bază</div>
+                    <div class="option" data-correct="true">Acid</div>
+                    <div class="option">Oxid</div>
+                    <div class="option">Sare</div>
+                </div>
+                <button class="btn btn-check" onclick="checkAnswer(this)">Verifică răspunsurile</button>
+                <button class="btn btn-reset" onclick="resetExercise(this)">Resetează</button>
+                
+                <div class="feedback"></div>
+            </div>
+        </section>
+        
+        <section id="exercitii" class="content-section">
+            <h2>Exerciții interactive</h2>
+            <p>Completează acest test final pentru a-ți verifica cunoștințele acumulate din toate capitolele.</p>
+            
+            <div class="exercise">
+                <div class="exercise-title">
+                    <i class="fas fa-star"></i>
+                    <h3>Test final de evaluare</h3>
+                </div>
+                
+                <div class="question">1. Câte tipuri de atomi diferiți conține un element chimic?</div>
+                <div class="options">
+                    <div class="option">Cel puțin 2</div>
+                    <div class="option" data-correct="true">Un singur tip</div>
+                    <div class="option">Între 2 și 10</div>
+                    <div class="option">Număr variabil</div>
+                </div>
+                
+                <div class="question" style="margin-top: 1.5rem;">2. Ce particule se găsesc în nucleul atomului?</div>
+                <div class="options">
+                    <div class="option">Electroni și neutroni</div>
+                    <div class="option">Doar electroni</div>
+                    <div class="option" data-correct="true">Protoni și neutroni</div>
+                    <div class="option">Doar protoni</div>
+                </div>
+                
+                <div class="question" style="margin-top: 1.5rem;">3. Care dintre următoarele este un metaloid?</div>
+                <div class="options">
+                    <div class="option">Aur (Au)</div>
+                    <div class="option">Oxigen (O)</div>
+                    <div class="option" data-correct="true">Siliciu (Si)</div>
+                    <div class="option">Clor (Cl)</div>
+                </div>
+                
+                <div class="question" style="margin-top: 1.5rem;">4. Ce fel de compus este CO₂?</div>
+                <div class="options">
+                    <div class="option">Bază</div>
+                    <div class="option">Acid</div>
+                    <div class="option" data-correct="true">Oxid</div>
+                    <div class="option">Sare</div>
+                </div>
+                
+                <div class="question" style="margin-top: 1.5rem;">5. Care este simbolul chimic pentru sodiu?</div>
+                <div class="options">
+                    <div class="option">So</div>
+                    <div class="option" data-correct="true">Na</div>
+                    <div class="option">Sd</div>
+                    <div class="option">S</div>
+                </div>
+                
+                <button class="btn btn-check" onclick="checkFinalTest()">Verifică testul final</button>
+                <button class="btn btn-reset" onclick="resetFinalTest()">Resetează testul</button>
+                
+                <div class="feedback"></div>
+                
+                <div class="score-container" id="score-container" style="display: none;">
+                    <h3>Rezultatul tău</h3>
+                    <div class="score" id="final-score">0/5</div>
+                    <p id="score-message"></p>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>© 2023 Platformă educațională de Chimie Anorganică - Clasa a 7-a</p>
+        <p>Realizat pentru îmbunătățirea procesului de învățare</p>
+    </footer>
+    
+    <script>
+        // Funcționalitate pentru tab-uri
+        const tabs = document.querySelectorAll('.tab');
+        const sections = document.querySelectorAll('.content-section');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Elimină clasa active de la toate tab-urile
+                tabs.forEach(t => t.classList.remove('active'));
+                // Adaugă clasa active la tab-ul curent
+                tab.classList.add('active');
+                
+                // Ascunde toate secțiunile
+                sections.forEach(section => section.classList.remove('active'));
+                
+                // Afișează secțiunea corespunzătoare
+                const target = tab.getAttribute('data-target');
+                document.getElementById(target).classList.add('active');
+            });
+        });
+        
+        // Funcționalitate pentru exerciții interactive
+        function selectOption(optionElement) {
+            // Dacă opțiunea este deja selectată, o deselectează
+            if (optionElement.classList.contains('selected')) {
+                optionElement.classList.remove('selected');
+                return;
+            }
+            
+            // Elimină selecția de la alte opțiuni din aceeași întrebare
+            const optionsContainer = optionElement.parentElement;
+            optionsContainer.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Selectează opțiunea curentă
+            optionElement.classList.add('selected');
+        }
+        
+        // Adaugă event listener la toate opțiunile
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', () => {
+                selectOption(option);
+            });
+        });
+        
+        // Funcție pentru verificarea răspunsurilor
+        function checkAnswer(button) {
+            const exercise = button.closest('.exercise');
+            const options = exercise.querySelectorAll('.option');
+            let correctAnswers = 0;
+            let totalQuestions = 0;
+            
+            // Parcurge fiecare întrebare din exercițiu
+            const questionContainers = exercise.querySelectorAll('.options');
+            questionContainers.forEach(container => {
+                totalQuestions++;
+                const selectedOption = container.querySelector('.option.selected');
+                
+                if (selectedOption && selectedOption.getAttribute('data-correct') === 'true') {
+                    correctAnswers++;
+                    selectedOption.classList.add('correct');
+                } else if (selectedOption) {
+                    selectedOption.classList.add('incorrect');
+                    // Arată răspunsul corect
+                    const correctOption = container.querySelector('.option[data-correct="true"]');
+                    if (correctOption) correctOption.classList.add('correct');
+                }
+            });
+            
+            // Afișează feedback-ul
+            const feedback = exercise.querySelector('.feedback');
+            if (correctAnswers === totalQuestions) {
+                feedback.textContent = `Excelent! Ai răspuns corect la toate întrebările (${correctAnswers}/${totalQuestions}).`;
+                feedback.className = 'feedback correct';
+            } else {
+                feedback.textContent = `Ai răspuns corect la ${correctAnswers} din ${totalQuestions} întrebări. Încearcă din nou!`;
+                feedback.className = 'feedback incorrect';
+            }
+        }
+        
+        // Funcție pentru resetarea exercițiului
+        function resetExercise(button) {
+            const exercise = button.closest('.exercise');
+            const options = exercise.querySelectorAll('.option');
+            
+            options.forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            const feedback = exercise.querySelector('.feedback');
+            feedback.textContent = '';
+            feedback.className = 'feedback';
+            
+            // Ascunde containerul de scor pentru testul final
+            const scoreContainer = exercise.querySelector('.score-container');
+            if (scoreContainer) scoreContainer.style.display = 'none';
+        }
+        
+        // Funcție specială pentru testul final
+        function checkFinalTest() {
+            const exercise = document.querySelector('#exercitii .exercise');
+            const options = exercise.querySelectorAll('.option');
+            let correctAnswers = 0;
+            let totalQuestions = 0;
+            
+            // Parcurge fiecare întrebare din exercițiu
+            const questionContainers = exercise.querySelectorAll('.options');
+            questionContainers.forEach(container => {
+                totalQuestions++;
+                const selectedOption = container.querySelector('.option.selected');
+                
+                if (selectedOption && selectedOption.getAttribute('data-correct') === 'true') {
+                    correctAnswers++;
+                    selectedOption.classList.add('correct');
+                } else if (selectedOption) {
+                    selectedOption.classList.add('incorrect');
+                    // Arată răspunsul corect
+                    const correctOption = container.querySelector('.option[data-correct="true"]');
+                    if (correctOption) correctOption.classList.add('correct');
+                }
+            });
+            
+            // Afișează feedback-ul
+            const feedback = exercise.querySelector('.feedback');
+            const scoreContainer = document.getElementById('score-container');
+            const finalScore = document.getElementById('final-score');
+            const scoreMessage = document.getElementById('score-message');
+            
+            finalScore.textContent = `${correctAnswers}/${totalQuestions}`;
+            
+            if (correctAnswers === totalQuestions) {
+                feedback.textContent = 'Felicitări! Ai obținut scorul maxim!';
+                feedback.className = 'feedback correct';
+                scoreMessage.textContent = 'Excelent! Ai stăpânit foarte bine noțiunile de bază ale chimiei anorganice.';
+            } else if (correctAnswers >= totalQuestions / 2) {
+                feedback.textContent = 'Bun rezultat! Mai exersează și vei obține scorul maxim.';
+                feedback.className = 'feedback correct';
+                scoreMessage.textContent = 'Ai o bază solidă de cunoștințe. Continuă să exersezi pentru a îmbunătăți rezultatele.';
+            } else {
+                feedback.textContent = 'Mai ai de exersat. Reia capitolele și încearcă din nou.';
+                feedback.className = 'feedback incorrect';
+                scoreMessage.textContent = 'Recomand să revezi noțiunile fundamentale și să repeți exercițiile.';
+            }
+            
+            scoreContainer.style.display = 'block';
+        }
+        
+        function resetFinalTest() {
+            resetExercise(document.querySelector('#exercitii .btn-reset'));
+        }
+        
+        // Crearea tabelului periodic simplificat
+        function createPeriodicTable() {
+            const periodicTable = document.getElementById('periodic-table');
+            
+            // Elemente pentru primele 3 rânduri ale tabelului periodic
+            const elements = [
+                { num: 1, sym: 'H', name: 'Hidrogen', type: 'nonmetal' },
+                { num: 2, sym: 'He', name: 'Heliu', type: 'noble' },
+                { num: 3, sym: 'Li', name: 'Litiu', type: 'metal' },
+                { num: 4, sym: 'Be', name: 'Beriliu', type: 'metal' },
+                { num: 5, sym: 'B', name: 'Bor', type: 'metalloid' },
+                { num: 6, sym: 'C', name: 'Carbon', type: 'nonmetal' },
+                { num: 7, sym: 'N', name: 'Azot', type: 'nonmetal' },
+                { num: 8, sym: 'O', name: 'Oxigen', type: 'nonmetal' },
+                { num: 9, sym: 'F', name: 'Fluor', type: 'nonmetal' },
+                { num: 10, sym: 'Ne', name: 'Neon', type: 'noble' },
+                { num: 11, sym: 'Na', name: 'Sodiu', type: 'metal' },
+                { num: 12, sym: 'Mg', name: 'Magneziu', type: 'metal' },
+                { num: 13, sym: 'Al', name: 'Aluminiu', type: 'metal' },
+                { num: 14, sym: 'Si', name: 'Siliciu', type: 'metalloid' },
+                { num: 15, sym: 'P', name: 'Fosfor', type: 'nonmetal' },
+                { num: 16, sym: 'S', name: 'Sulf', type: 'nonmetal' },
+                { num: 17, sym: 'Cl', name: 'Clor', type: 'nonmetal' },
+                { num: 18, sym: 'Ar', name: 'Argon', type: 'noble' }
+            ];
+            
+            // Culori pentru fiecare tip de element
+            const typeColors = {
+                'metal': '#f8d7da',
+                'nonmetal': '#d1ecf1',
+                'metalloid': '#d4edda',
+                'noble': '#fef3cd'
+            };
+            
+            // Adaugă celule goale pentru primul rând (grupele 3-12 nu sunt afișate în exemplul nostru simplificat)
+            for (let i = 1; i <= 18; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'element-cell';
+                
+                // Găsește elementul pentru această poziție
+                const element = elements.find(el => el.num === i);
+                
+                if (element) {
+                    cell.innerHTML = `
+                        <div class="element-number">${element.num}</div>
+                        <div class="element-symbol-cell">${element.sym}</div>
+                    `;
+                    cell.style.backgroundColor = typeColors[element.type];
+                    cell.title = `${element.name} (${element.sym}) - ${getTypeName(element.type)}`;
+                } else {
+                    // Celulă goală pentru elementele care nu sunt în lista noastră
+                    cell.style.backgroundColor = '#f8f9fa';
+                    cell.style.visibility = 'hidden';
+                }
+                
+                periodicTable.appendChild(cell);
+            }
+        }
+        
+        function getTypeName(type) {
+            const typeNames = {
+                'metal': 'Metal',
+                'nonmetal': 'Nemetal',
+                'metalloid': 'Metaloid',
+                'noble': 'Gaz nobil'
+            };
+            return typeNames[type] || type;
+        }
+        
+        // Inițializare la încărcarea paginii
+        document.addEventListener('DOMContentLoaded', function() {
+            createPeriodicTable();
+            
+            // Adaugă evenimente de click la celulele tabelului periodic
+            document.querySelectorAll('.element-cell').forEach(cell => {
+                cell.addEventListener('click', function() {
+                    const title = this.getAttribute('title');
+                    if (title) {
+                        alert(title);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
